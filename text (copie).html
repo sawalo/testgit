@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="text.css"/>
+   
+</head>
+<body> 
+    <div><h1>je vais a simplon</h1></div>
+    <div  id= "date>"></div> 
+<header>
+    <div class = wrapper>
+      <h1> Affichage Temperature </h1> 
+     
+     
+    </div>
+</header>
+<section id="main-image">
+    <div class =wrapper>
+        
+        <h2> <img src="images/soleil2.png">l'image du
+            <br> <strong>temps d'Aujourd'hui</strong>
+          <h2> <img src="images/nuage4.gif"></h2>  
+             </h2>
+             <div id="image"></div>
+    </div>
+</section>
+<section id ="affichage temperature"> 
+    <div class= wrapper>
+    </div>
+</section>
+<footer>
+    <h1> Temperature
+         <br> <span id="tmp"></span> °c</h1>
+       
+</footer>
+    <script>
+       var socket = new WebSocket('ws://localhost:8081');// mettre l'address du serveur socket pour etablir la connexion
+          socket.addEventListener("open",()=>console.log("you are connected"))
+          socket.onmessage=function(event){// recuperer le message envoyer par le serveur
+              //var message = JSON.parse(event.data);// convertir le tableau d'objet en fichier json
+              console.log(event.data)
+              document.getElementById('tmp').innerHTML=event.data
+            };
+              if(event.data<26){
+              document.getElementsById("image").innerHTML='<img src="images/nuages.jpg" >' 
+            
+              }
+              else{ 
+                  document.getElementsById("image").innerHTML='<img src="images/images.jpeg" >' 
+              }
+         
+              function date(){
+    var dateGlobale =new Date()
+
+              var jour = dateGlobale.getDate()
+              var mois = dateGlobale.getMonth()
+              var annee = dateGlobale.getFullYear()
+              var jour_semaine = dateGlobale.getDay()
+
+              var heure = dateGlobale.getHours()
+              var minute = dateGlobale.getMinutes()
+              var seconde= dateGlobale.getSeconds()
+            
+             
+             
+
+              var MOIS =[ "janvier", "fevier", "mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"]
+               mois =MOIS[mois]
+               var JOUR_SEMAINE=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
+               jour_semaine=JOUR_SEMAINE[jour_semaine] 
+               
+               
+
+              var resultat= document.getElementById("date")
+              resultat.innerHTML= jour_semaine+' '+jour+" "+mois +" "+annee+'  '+" "+heure+" "+minute+" "+seconde
+} 
+date()
+    </script> 
+   <script ></script>
+    </body>
+    </html>
+<script src="app.js"> </script>
